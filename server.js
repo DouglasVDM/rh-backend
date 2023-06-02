@@ -13,20 +13,6 @@ app.use(express.json());
 
 // ROUTES
 
-// create a nouns
-// app.post("/api/v1/nouns", async (req, res) => {
-//     try {
-//         const { description } = (req.body);
-//         const newDepartment = await pool.query("INSERT INTO nouns (description) VALUES($1) RETURNING *", [description]
-//         );
-
-//         res.json(newDepartment.rows[0]);
-//     } catch (err) {
-//         console.error(err.message);
-//     }
-
-// });
-
 // welcome message
 app.get("/api/v1", async (req, res) => {
     try {
@@ -37,8 +23,6 @@ app.get("/api/v1", async (req, res) => {
     }
 })
 
-
-// get all nouns
 app.get("/api/v1/nouns", async (req, res) => {
     try {
         const allNouns = await pool.query("SELECT * FROM nouns");
@@ -49,7 +33,6 @@ app.get("/api/v1/nouns", async (req, res) => {
     }
 })
 
-// get a nouns by id
 app.get("/api/v1/nouns/:id", async (req, res) => {
     const { id } = req.params;
     try {
@@ -61,30 +44,69 @@ app.get("/api/v1/nouns/:id", async (req, res) => {
     }
 })
 
-// // update a nouns
-// app.put("/api/v1/nouns/:id", async (req, res) => {
-//     const { id } = req.params;
-//     const { description } = (req.body);
-//     try {
-//         const updateDepartment = await pool.query("UPDATE nouns SET description = $1 WHERE department_id = $2", [description, id]);
+app.get("/api/v1/determiners", async (req, res) => {
+    try {
+        const allDeterminers = await pool.query("SELECT * FROM determiners");
+        res.json(allDeterminers.rows)
 
-//         res.json(`Department ${id} description was updated to ${description}!`)
-//     } catch (err) {
-//         console.error(err.message);
-//     }
-// });
+    } catch (err) {
+        console.error(err.message);
+    }
+})
 
-// // delete a nouns
-// app.delete("/api/v1/nouns/:id", async (req, res) => {
-//     const { id } = req.params;
-//     try {
-//         const deleteDepartment = await pool.query("DELETE FROM nouns WHERE department_id = $1", [id]);
+app.get("/api/v1/determiners/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+        const determiner = await pool.query("SELECT * FROM determiners WHERE determiner_id = $1", [id]);
 
-//         res.json(`Department id: ${id} deleted!`)
-//     } catch (err) {
-//         console.error(err.message);
-//     }
-// });
+        res.json(determiner.rows)
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
+app.get("/api/v1/verbs", async (req, res) => {
+    try {
+        const allVerbs = await pool.query("SELECT * FROM verbs");
+        res.json(allVerbs.rows)
+
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
+app.get("/api/v1/verbs/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+        const verb = await pool.query("SELECT * FROM verbs WHERE verb_id = $1", [id]);
+
+        res.json(verb.rows)
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
+app.get("/api/v1/adjectives", async (req, res) => {
+    try {
+        const allAdjectives = await pool.query("SELECT * FROM adjectives");
+        res.json(allAdjectives.rows)
+
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
+app.get("/api/v1/adjectives/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+        const adjective = await pool.query("SELECT * FROM adjectives WHERE adjective_id = $1", [id]);
+
+        res.json(adjective.rows)
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`)
