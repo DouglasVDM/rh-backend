@@ -4,84 +4,36 @@ noun_id serial PRIMARY key,
 noun_name VARCHAR(55) NOT null
 );
 
+DROP table IF EXISTs verbs;
+CREATE table verbs (
+verb_id serial PRIMARY key,
+verb_name VARCHAR(55) NOT null
+);
+
+DROP table IF EXISTs determiners;
+CREATE table determiners (
+determiner_id serial PRIMARY key,
+determiner_name VARCHAR(55) NOT null
+);
+
+DROP table IF EXISTs adjectives;
+CREATE table adjectives (
+adjective_id serial PRIMARY key,
+adjective_name VARCHAR(55) NOT null
+);
+
+
+
 insert 
 into nouns(noun_name)
 values ('time');
 
 insert 
-into nouns(noun_name)
-values ('person');
+into verbs(verb_name)
+values ('do');
 
 insert 
-into nouns(noun_name)
-values ('year');
-
-insert 
-into nouns(noun_name)
-values ('way');
-
-insert 
-into nouns(noun_name)
-values ('day');
-
-insert 
-into nouns(noun_name)
-values ('thing');
-
-insert 
-into nouns(noun_name)
-values ('man');
-
-insert 
-into nouns(noun_name)
-values ('world');
-
-insert 
-into nouns(noun_name)
-values ('life');
-
-insert 
-into nouns(noun_name)
-values ('hand');
-
-insert 
-into nouns(noun_name)
-values ('part');
-
-insert 
-into nouns(noun_name)
-values ('child');
-
-select *
-from nouns;
+into determiners(determiner_name)
+values ('a');
 
 
-time
-person
-year
-way
-day
-thing
-man
-world
-life
-hand
-part
-child
-eye
-woman
-place
-work
-week
-case
-point
-government
-company
-number
-group
-problem
-fact
-
-*********
-*
-*********
