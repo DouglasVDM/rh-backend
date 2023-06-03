@@ -107,6 +107,27 @@ app.get("/api/v1/adjectives/:id", async (req, res) => {
     }
 })
 
+app.get("/api/v1/sentences", async (req, res) => {
+    try {
+        const allSentences = await pool.query("SELECT * FROM sentences");
+        res.json(allSentences.rows)
+
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
+app.post("/api/v1/sentences", async (req, res) => {
+    try {
+        const { sentence_name } = (req.body);
+        const newSentence = await pool.query("INSERT INTO sentences (sentence_name) VALUES($1) RETURNING *", [sentence_name]
+        );
+
+        res.json(newSentence.rows[0]);
+    } catch (err) {
+        console.error(err.message);
+    }
+})
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`)
