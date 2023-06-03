@@ -22,18 +22,9 @@ adjective_id serial PRIMARY key,
 adjective_name VARCHAR(55) NOT null
 );
 
-
-
-insert 
-into nouns(noun_name)
-values ('time');
-
-insert 
-into verbs(verb_name)
-values ('do');
-
-insert 
-into determiners(determiner_name)
-values ('a');
-
+DROP table IF EXISTs sentences;
+CREATE table sentences (
+sentence_id serial PRIMARY key,
+sentence_name VARCHAR(1000) NOT null
+);
 
