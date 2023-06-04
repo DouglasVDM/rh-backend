@@ -56,3 +56,8 @@ VALUES
   ('I saw a cat and a dog.'),
   ('Wow, what a beautiful flower!'),
   ('Oh, I forgot my keys!');
+ 
+ select * from words w ;
+
+select * from sentences s
+ ORDER BY id DESC;
