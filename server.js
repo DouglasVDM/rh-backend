@@ -96,16 +96,18 @@ app.get("/api/v1/adjectives", async (req, res) => {
     }
 })
 
-app.get("/api/v1/adjectives/:id", async (req, res) => {
-    const { id } = req.params;
+// API route to retrieve words based on their type
+app.get("/api/v1/words/:wordType", async (req, res) => {
+    const { wordType } = req.params;
     try {
-        const adjective = await pool.query("SELECT * FROM adjectives WHERE adjective_id = $1", [id]);
+        const words = await pool.query("SELECT * FROM words WHERE word_type = $1", [id]);
 
-        res.json(adjective.rows)
+        res.status(201).json(words.rows);
     } catch (err) {
-        console.error(err.message);
+        console.error('Error retrieving words', err);
+        res.status(500).json({error:'Internal server error'});
     }
-})
+});
 
 // API route to retrieve all previously submitted sentences
 app.get("/api/v1/sentences", async (req, res) => {
