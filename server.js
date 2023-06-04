@@ -22,11 +22,23 @@ app.get("/api/v1", async (req, res) => {
     }
 })
 
+// API route to retrieve words
+app.get("/api/v1/words", async (req, res) => {
+    try {
+        const words = await pool.query("SELECT * FROM words");
+
+        res.status(201).json(words.rows);
+    } catch (err) {
+        console.error('Error retrieving words', err);
+        res.status(500).json({error:'Internal server error'});
+    }
+});
+
 // API route to retrieve words based on their type
 app.get("/api/v1/words/:wordType", async (req, res) => {
     const { wordType } = req.params;
     try {
-        const words = await pool.query("SELECT * FROM words WHERE word_type = $1", [id]);
+        const words = await pool.query("SELECT * FROM words WHERE word_type = $1", [wordType]);
 
         res.status(201).json(words.rows);
     } catch (err) {
@@ -38,7 +50,7 @@ app.get("/api/v1/words/:wordType", async (req, res) => {
 // API route to retrieve all previously submitted sentences
 app.get("/api/v1/sentences", async (req, res) => {
     try {
-        const allSentences = await pool.query("SELECT * FROM sentences");
+        const allSentences = await pool.query("SELECT * FROM sentences ORDER BY id DESC");
         res.status(201).json(allSentences.rows)
 
     } catch (err) {
