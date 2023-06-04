@@ -12,84 +12,10 @@ app.use(cors());
 app.use(express.json());
 
 // ROUTES
-
 // welcome message
 app.get("/api/v1", async (req, res) => {
     try {
         res.send("From API Server: Hello World")
-
-    } catch (err) {
-        console.error(err.message);
-    }
-})
-
-app.get("/api/v1/nouns", async (req, res) => {
-    try {
-        const allNouns = await pool.query("SELECT * FROM nouns");
-        res.json(allNouns.rows)
-
-    } catch (err) {
-        console.error(err.message);
-    }
-})
-
-app.get("/api/v1/nouns/:id", async (req, res) => {
-    const { id } = req.params;
-    try {
-        const noun = await pool.query("SELECT * FROM nouns WHERE noun_id = $1", [id]);
-
-        res.json(noun.rows)
-    } catch (err) {
-        console.error(err.message);
-    }
-})
-
-app.get("/api/v1/determiners", async (req, res) => {
-    try {
-        const allDeterminers = await pool.query("SELECT * FROM determiners");
-        res.json(allDeterminers.rows)
-
-    } catch (err) {
-        console.error(err.message);
-    }
-})
-
-app.get("/api/v1/determiners/:id", async (req, res) => {
-    const { id } = req.params;
-    try {
-        const determiner = await pool.query("SELECT * FROM determiners WHERE determiner_id = $1", [id]);
-
-        res.json(determiner.rows)
-    } catch (err) {
-        console.error(err.message);
-    }
-})
-
-app.get("/api/v1/verbs", async (req, res) => {
-    try {
-        const allVerbs = await pool.query("SELECT * FROM verbs");
-        res.json(allVerbs.rows)
-
-    } catch (err) {
-        console.error(err.message);
-    }
-})
-
-app.get("/api/v1/verbs/:id", async (req, res) => {
-    const { id } = req.params;
-    try {
-        const verb = await pool.query("SELECT * FROM verbs WHERE verb_id = $1", [id]);
-
-        res.json(verb.rows)
-    } catch (err) {
-        console.error(err.message);
-    }
-})
-
-app.get("/api/v1/adjectives", async (req, res) => {
-    try {
-        const allAdjectives = await pool.query("SELECT * FROM adjectives");
-        res.json(allAdjectives.rows)
 
     } catch (err) {
         console.error(err.message);
