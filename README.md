@@ -1,10 +1,64 @@
-# testBE
+# Express Backend
 
-## To load 25words in each table
+## Description
+This is the backend of the PERN Stack application. It is built using Express and provides the API endpoints for fetching word types, words, and submitting sentences.
 
+## Installation
+1. Clone the repository. `git clone https://github.com/DouglasVDM/testBE.git`
+2. Navigate to the `backend` directory. `cd backend`
+3. Run the following command to install the dependencies: `npm install`
+4. Update the database connection configuration in the `.env` file.
+
+```sql
+PORT                =   <serverPort eg.5000>
+POSTGRES_HOST       =   <dependingOnEnvironment eg.localhost>
+POSTGRES_USER       =   <postgresUsername>
+POSTGRES_PASSWORD   =   <postgresUserPassword>
+POSTGRES_PORT       =   <standardDBPort = 5432>
+POSTGRES_DB         =   <postgresDatabaseName>
 ```
-Searched for words online
-Saved it to a google sheet
-Downloaded it as csv
-Imported the csv to dbtable
+
+5. Start the backend server with the following command: `npm run dev` or `npm start`
+6. The server will run on [http://localhost:5000](http://localhost:5000).
+
+## API Endpoints
+- `GET /api/v1/words`: Retrieves the list of word types.
+- `GET /api/v1/words/:wordType`: Retrieves words of a specific type.
+- `GET /api/v1/sentences`: Retrieves all previously submitted sentences.
+- `POST /api/v1/sentences`: Submits a new sentence.
+
+## Dependencies
+- Express
+- Cors
+- pg (PostgreSQL client)
+- dotenv (for environment variables)
+---
+---
+# Database (PostgreSQL)
+
+## Description
+This is the PostgreSQL database used for storing word types, words, and submitted sentences.
+
+## Installation
+1. Install PostgreSQL on your system if not already installed.
+2. Create a new database for the application.
+3. Update the database connection configuration in the `.env` file of the backend.
+4. In my case, I have used the official postgres docker image to run in a container
 ```
+ docker run --name <nameOfTheContainer> -e POSTGRES_PASSWORD=<databaseUserPassword> -p 5432:5432 -d postgres`
+```
+5. To stop the container: `docker stop <nameOfTheContainer>` 
+6. To start the container: `docker start <nameOfTheContainer>` 
+## Database Schema
+The database schema consists of the following tables:
+
+- `words`: Stores the words associated with their respective types.
+- `sentences`: Stores the submitted sentences.
+
+## Sample Data
+You can use the following SQL statements to insert sample data into the tables:
+ see the `database.sql` file
+
+---
+---
+
