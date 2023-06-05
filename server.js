@@ -34,11 +34,25 @@ app.get("/api/v1/words", async (req, res) => {
     }
 });
 
-// API route to retrieve words based on their type
-app.get("/api/v1/words/:wordType", async (req, res) => {
-    const { wordType } = req.params;
+
+// API route to retrieve wordtypes
+app.get("/api/v1/wordtypes", async (req, res) => {
     try {
-        const words = await pool.query("SELECT * FROM words WHERE word_type = $1", [wordType]);
+        const wordtypes = await pool.query("SELECT type FROM types");
+        
+        res.status(201).json(wordtypes.rows);
+    } catch (err) {
+        console.error('Error retrieving word types', err);
+        res.status(500).json({error:'Internal server error'});
+    }
+});
+
+let table='';
+// API route to retrieve words based on their type
+app.get('/api/v1/nouns', async (req, res) => {
+    // const { table } = req.params;
+    try {
+        const words = await pool.query('SELECT * FROM nouns');
 
         res.status(201).json(words.rows);
     } catch (err) {

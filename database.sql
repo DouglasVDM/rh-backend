@@ -38,6 +38,10 @@ CREATE TABLE IF NOT EXISTS sentences (
   sentence TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS types (
+  id SERIAL PRIMARY KEY,
+  type TEXT NOT NULL
+);
 -- Insert sample data into the sentences table
 INSERT INTO sentences (sentence)
 VALUES
@@ -57,6 +61,49 @@ VALUES
   ('Wow, what a beautiful flower!'),
   ('Oh, I forgot my keys!');
  
+-- Insert sample data into the types table
+INSERT INTO types (type)
+VALUES
+  ('Noun'),
+  ('Verb'),
+  ('Adjective'),
+  ('Adverb'),
+  ('Pronoun'),
+  ('Preposition'),
+  ('Conjunction'),
+  ('Determiner'),
+  ('Exclamation');
+
+ROP table IF EXISTs types;
+CREATE TABLE IF NOT EXISTS types (
+  id SERIAL PRIMARY KEY,
+  type TEXT NOT NULL
+);
+
+-- Insert sample data into the types table
+INSERT INTO types (type)
+VALUES
+  ('nouns'),
+  ('Verb'),
+  ('Adjective'),
+  ('Adverb'),
+  ('Pronoun'),
+  ('Preposition'),
+  ('Conjunction'),
+  ('Determiner'),
+  ('Exclamation');
+
+select * from types;
+
+CREATE TABLE IF NOT EXISTS nouns (
+  id SERIAL PRIMARY KEY,
+  noun TEXT NOT NULL
+);
+
+INSERT INTO nouns (noun)
+VALUES ('Dog'), ('Cat'), ('Chair'), ('Table'), ('Car'), ('Book'), ('House'), ('Tree'), ('River'), ('Sun'), ('Moon'), ('Flower'), ('Phone'), ('Computer'), ('Pen'), ('Paper'), ('Bed'), ('Door'), ('Window'), ('Street'), ('Cup'), ('Spoon'), ('Shirt'), ('Shoe'), ('Bird');
+
+
  select * from words w ;
 
 select * from sentences s
