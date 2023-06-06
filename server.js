@@ -38,7 +38,7 @@ app.get("/api/v1/words", async (req, res) => {
 // API route to retrieve wordtypes
 app.get("/api/v1/wordtypes", async (req, res) => {
     try {
-        const wordtypes = await pool.query("SELECT type FROM types");
+        const wordtypes = await pool.query("SELECT * FROM types");
         
         res.status(201).json(wordtypes.rows);
     } catch (err) {
@@ -47,8 +47,7 @@ app.get("/api/v1/wordtypes", async (req, res) => {
     }
 });
 
-let table='';
-// API route to retrieve words based on their type
+// API route to retrieve words based on nouns
 app.get('/api/v1/nouns', async (req, res) => {
     // const { table } = req.params;
     try {
