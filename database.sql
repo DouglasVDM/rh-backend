@@ -75,6 +75,38 @@ CREATE TABLE IF NOT EXISTS adjectives (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL
 );
+DROP table IF EXISTs adverbs;
+CREATE TABLE IF NOT EXISTS adverbs (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL
+);
+INSERT INTO adverbs (name)
+VALUES
+('very'),
+('often'),
+('always'),
+('never'),
+('really'),
+('quickly'),
+('well'),
+('too'),
+('also'),
+('still'),
+('just'),
+('now'),
+('there'),
+('then'),
+('here'),
+('down'),
+('up'),
+('again'),
+('away'),
+('together'),
+('back'),
+('off'),
+('so'),
+('how'),
+('as');
 -- Insert sample data into the types table
 INSERT INTO types (type)
 VALUES ('Nouns'),
