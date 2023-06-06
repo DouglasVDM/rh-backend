@@ -90,6 +90,39 @@ CREATE TABLE IF NOT EXISTS prepositions (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL
 );
+DROP table IF EXISTs conjunctions;
+CREATE TABLE IF NOT EXISTS conjunctions (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL
+);
+
+INSERT INTO conjunctions (name)
+VALUES
+('and'),
+('but'),
+('or'),
+('so'),
+('yet'),
+('for'),
+('nor'),
+('after'),
+('although'),
+('because'),
+('before'),
+('if'),
+('once'),
+('since'),
+('though'),
+('unless'),
+('until'),
+('when'),
+('where'),
+('whether'),
+('while'),
+('as'),
+('since'),
+('that'),
+('while');
 INSERT INTO prepositions (name)
 VALUES
 ('about'),
