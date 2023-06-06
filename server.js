@@ -143,6 +143,18 @@ app.get('/api/v1/determiners', async (req, res) => {
     }
 });
 
+// API route to retrieve words based on exclamations
+app.get('/api/v1/exclamations', async (req, res) => {
+    try {
+        const words = await pool.query('SELECT * FROM exclamations');
+
+        res.status(201).json(words.rows);
+    } catch (err) {
+        console.error('Error retrieving exclamations', err);
+        res.status(500).json({error:'Internal server error'});
+    }
+});
+
 // API route to retrieve all previously submitted sentences
 app.get("/api/v1/sentences", async (req, res) => {
     try {

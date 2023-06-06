@@ -100,7 +100,39 @@ CREATE TABLE IF NOT EXISTS determiners (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL
 );
-
+DROP table IF EXISTs exclamations;
+CREATE TABLE IF NOT EXISTS exclamations (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL
+);
+INSERT INTO exclamations (name)
+VALUES
+('Wow!'),
+('Oh no!'),
+('Bravo!'),
+('Yay!'),
+('Ouch!'),
+('Awesome!'),
+('Fantastic!'),
+('Incredible!'),
+('Phew!'),
+('Oops!'),
+('Hooray!'),
+('Oh dear!'),
+('Oh my!'),
+('Oh wow!'),
+('Oh well!'),
+('Amazing!'),
+('Unbelievable!'),
+('Terrific!'),
+('Gosh!'),
+('Oh no way!'),
+('Oh yeah!'),
+('Oh boy!'),
+('Oh golly!'),
+('Oh snap!'),
+('Oh goodness!'),
+('Oh heavens!');
 INSERT INTO determiners (name)
 VALUES
 ('the'),
