@@ -95,7 +95,40 @@ CREATE TABLE IF NOT EXISTS conjunctions (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL
 );
+DROP table IF EXISTs determiners;
+CREATE TABLE IF NOT EXISTS determiners (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL
+);
 
+INSERT INTO determiners (name)
+VALUES
+('the'),
+('a'),
+('an'),
+('this'),
+('that'),
+('these'),
+('those'),
+('my'),
+('your'),
+('his'),
+('her'),
+('its'),
+('our'),
+('their'),
+('some'),
+('any'),
+('no'),
+('each'),
+('every'),
+('all'),
+('both'),
+('neither'),
+('either'),
+('somebody'),
+('nobody'),
+('everyone');
 INSERT INTO conjunctions (name)
 VALUES
 ('and'),

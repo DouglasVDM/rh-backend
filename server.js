@@ -131,6 +131,18 @@ app.get('/api/v1/conjunctions', async (req, res) => {
     }
 });
 
+// API route to retrieve words based on determiners
+app.get('/api/v1/determiners', async (req, res) => {
+    try {
+        const words = await pool.query('SELECT * FROM determiners');
+
+        res.status(201).json(words.rows);
+    } catch (err) {
+        console.error('Error retrieving determiners', err);
+        res.status(500).json({error:'Internal server error'});
+    }
+});
+
 // API route to retrieve all previously submitted sentences
 app.get("/api/v1/sentences", async (req, res) => {
     try {
