@@ -35,7 +35,7 @@ DROP table IF EXISTs sentences;
  -- Create the sentences table
 CREATE TABLE IF NOT EXISTS sentences (
   id SERIAL PRIMARY KEY,
-  sentence TEXT NOT NULL
+  name TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS types (
