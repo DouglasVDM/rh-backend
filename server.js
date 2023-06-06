@@ -95,6 +95,17 @@ app.get('/api/v1/adverbs', async (req, res) => {
     }
 });
 
+// API route to retrieve words based on pronouns
+app.get('/api/v1/pronouns', async (req, res) => {
+    try {
+        const words = await pool.query('SELECT * FROM pronouns');
+
+        res.status(201).json(words.rows);
+    } catch (err) {
+        console.error('Error retrieving pronouns', err);
+        res.status(500).json({error:'Internal server error'});
+    }
+});
 
 // API route to retrieve all previously submitted sentences
 app.get("/api/v1/sentences", async (req, res) => {

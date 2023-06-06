@@ -80,6 +80,39 @@ CREATE TABLE IF NOT EXISTS adverbs (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL
 );
+DROP table IF EXISTs pronouns;
+CREATE TABLE IF NOT EXISTS pronouns (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL
+);
+INSERT INTO pronouns (name)
+VALUES
+('I'),
+('you'),
+('he'),
+('she'),
+('it'),
+('we'),
+('they'),
+('me'),
+('him'),
+('her'),
+('us'),
+('them'),
+('my'),
+('your'),
+('his'),
+('her'),
+('its'),
+('our'),
+('their'),
+('mine'),
+('yours'),
+('hers'),
+('ours'),
+('theirs'),
+('myself'),
+('yourself');
 INSERT INTO adverbs (name)
 VALUES
 ('very'),
