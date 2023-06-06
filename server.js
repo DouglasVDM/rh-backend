@@ -49,13 +49,24 @@ app.get("/api/v1/wordtypes", async (req, res) => {
 
 // API route to retrieve words based on nouns
 app.get('/api/v1/nouns', async (req, res) => {
-    // const { table } = req.params;
     try {
         const words = await pool.query('SELECT * FROM nouns');
 
         res.status(201).json(words.rows);
     } catch (err) {
-        console.error('Error retrieving words', err);
+        console.error('Error retrieving nouns', err);
+        res.status(500).json({error:'Internal server error'});
+    }
+});
+
+// API route to retrieve words based on verbs
+app.get('/api/v1/verbs', async (req, res) => {
+    try {
+        const words = await pool.query('SELECT * FROM verbs');
+
+        res.status(201).json(words.rows);
+    } catch (err) {
+        console.error('Error retrieving verbs', err);
         res.status(500).json({error:'Internal server error'});
     }
 });
