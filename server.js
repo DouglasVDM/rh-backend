@@ -71,6 +71,18 @@ app.get('/api/v1/verbs', async (req, res) => {
     }
 });
 
+// API route to retrieve words based on adjectives
+app.get('/api/v1/adjectives', async (req, res) => {
+    try {
+        const words = await pool.query('SELECT * FROM adjectives');
+
+        res.status(201).json(words.rows);
+    } catch (err) {
+        console.error('Error retrieving adjectives', err);
+        res.status(500).json({error:'Internal server error'});
+    }
+});
+
 // API route to retrieve all previously submitted sentences
 app.get("/api/v1/sentences", async (req, res) => {
     try {

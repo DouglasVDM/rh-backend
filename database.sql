@@ -55,21 +55,25 @@ VALUES ('The cat runs quickly.'),
   ('I saw a cat and a dog.'),
   ('Wow, what a beautiful flower!'),
   ('Oh, I forgot my keys!');
--- Insert sample data into the types table
-INSERT INTO types (type)
-VALUES ('Noun'),
-  ('Verb'),
-  ('Adjective'),
-  ('Adverb'),
-  ('Pronoun'),
-  ('Preposition'),
-  ('Conjunction'),
-  ('Determiner'),
-  ('Exclamation');
 DROP table IF EXISTs types;
 CREATE TABLE IF NOT EXISTS types (
   id SERIAL PRIMARY KEY,
   type TEXT NOT NULL
+);
+DROP table IF EXISTs nouns;
+CREATE TABLE IF NOT EXISTS nouns (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL
+);
+DROP table IF EXISTs verbs;
+CREATE TABLE IF NOT EXISTS verbs (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL
+);
+DROP table IF EXISTs adjectives;
+CREATE TABLE IF NOT EXISTS adjectives (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL
 );
 -- Insert sample data into the types table
 INSERT INTO types (type)
@@ -82,16 +86,6 @@ VALUES ('Nouns'),
   ('Conjunctions'),
   ('Determiners'),
   ('Exclamations');
-DROP table IF EXISTs nouns;
-CREATE TABLE IF NOT EXISTS nouns (
-  id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL
-);
-DROP table IF EXISTs verbs;
-CREATE TABLE IF NOT EXISTS verbs (
-  id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL
-);
 INSERT INTO nouns (name)
 VALUES ('Dog'),
   ('Cat'),
@@ -144,6 +138,34 @@ VALUES ('be'),
   ('need'),
   ('feel'),
   ('become');
+  INSERT INTO adjectives (name)
+VALUES
+('good'),
+('new'),
+('first'),
+('last'),
+('long'),
+('great'),
+('little'),
+('own'),
+('other'),
+('old'),
+('right'),
+('big'),
+('high'),
+('different'),
+('small'),
+('large'),
+('next'),
+('early'),
+('young'),
+('important'),
+('few'),
+('public'),
+('bad'),
+('same'),
+('able'),
+('whole');
 select *
 from words w;
 select *
