@@ -6,11 +6,9 @@ CREATE TABLE IF NOT EXISTS words (
   word_type VARCHAR(100) NOT NULL,
   word VARCHAR(100) NOT NULL
 );
-
 -- Insert sample data into the words table
 INSERT INTO words (word_type, word)
-VALUES
-  ('Noun', 'cat'),
+VALUES ('Noun', 'cat'),
   ('Noun', 'dog'),
   ('Noun', 'house'),
   ('Verb', 'run'),
@@ -30,22 +28,19 @@ VALUES
   ('Determiner', 'a'),
   ('Exclamation', 'Wow'),
   ('Exclamation', 'Oh');
-
 DROP table IF EXISTs sentences;
- -- Create the sentences table
+-- Create the sentences table
 CREATE TABLE IF NOT EXISTS sentences (
   id SERIAL PRIMARY KEY,
   sentence TEXT NOT NULL
 );
-
 CREATE TABLE IF NOT EXISTS types (
   id SERIAL PRIMARY KEY,
   type TEXT NOT NULL
 );
 -- Insert sample data into the sentences table
 INSERT INTO sentences (sentence)
-VALUES
-  ('The cat runs quickly.'),
+VALUES ('The cat runs quickly.'),
   ('She jumped and shouted happily.'),
   ('The red house is under the tree.'),
   ('He is a happy dog.'),
@@ -60,11 +55,9 @@ VALUES
   ('I saw a cat and a dog.'),
   ('Wow, what a beautiful flower!'),
   ('Oh, I forgot my keys!');
- 
 -- Insert sample data into the types table
 INSERT INTO types (type)
-VALUES
-  ('Noun'),
+VALUES ('Noun'),
   ('Verb'),
   ('Adjective'),
   ('Adverb'),
@@ -73,38 +66,88 @@ VALUES
   ('Conjunction'),
   ('Determiner'),
   ('Exclamation');
-
-ROP table IF EXISTs types;
+DROP table IF EXISTs types;
 CREATE TABLE IF NOT EXISTS types (
   id SERIAL PRIMARY KEY,
   type TEXT NOT NULL
 );
-
 -- Insert sample data into the types table
 INSERT INTO types (type)
-VALUES
-  ('nouns'),
-  ('Verb'),
-  ('Adjective'),
-  ('Adverb'),
-  ('Pronoun'),
-  ('Preposition'),
-  ('Conjunction'),
-  ('Determiner'),
-  ('Exclamation');
-
-select * from types;
-
+VALUES ('Nouns'),
+  ('Verbs'),
+  ('Adjectives'),
+  ('Adverbs'),
+  ('Pronouns'),
+  ('Prepositions'),
+  ('Conjunctions'),
+  ('Determiners'),
+  ('Exclamations');
+DROP table IF EXISTs nouns;
 CREATE TABLE IF NOT EXISTS nouns (
   id SERIAL PRIMARY KEY,
-  noun TEXT NOT NULL
+  name TEXT NOT NULL
 );
-
-INSERT INTO nouns (noun)
-VALUES ('Dog'), ('Cat'), ('Chair'), ('Table'), ('Car'), ('Book'), ('House'), ('Tree'), ('River'), ('Sun'), ('Moon'), ('Flower'), ('Phone'), ('Computer'), ('Pen'), ('Paper'), ('Bed'), ('Door'), ('Window'), ('Street'), ('Cup'), ('Spoon'), ('Shirt'), ('Shoe'), ('Bird');
-
-
- select * from words w ;
-
-select * from sentences s
- ORDER BY id DESC;
+DROP table IF EXISTs verbs;
+CREATE TABLE IF NOT EXISTS verbs (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL
+);
+INSERT INTO nouns (name)
+VALUES ('Dog'),
+  ('Cat'),
+  ('Chair'),
+  ('Table'),
+  ('Car'),
+  ('Book'),
+  ('House'),
+  ('Tree'),
+  ('River'),
+  ('Sun'),
+  ('Moon'),
+  ('Flower'),
+  ('Phone'),
+  ('Computer'),
+  ('Pen'),
+  ('Paper'),
+  ('Bed'),
+  ('Door'),
+  ('Window'),
+  ('Street'),
+  ('Cup'),
+  ('Spoon'),
+  ('Shirt'),
+  ('Shoe'),
+  ('Bird');
+INSERT INTO verbs (name)
+VALUES ('be'),
+  ('have'),
+  ('do'),
+  ('say'),
+  ('go'),
+  ('get'),
+  ('make'),
+  ('know'),
+  ('think'),
+  ('take'),
+  ('see'),
+  ('come'),
+  ('want'),
+  ('look'),
+  ('use'),
+  ('find'),
+  ('give'),
+  ('tell'),
+  ('work'),
+  ('call'),
+  ('try'),
+  ('ask'),
+  ('need'),
+  ('feel'),
+  ('become');
+select *
+from words w;
+select *
+from sentences s
+ORDER BY id DESC;
+select *
+from types;
