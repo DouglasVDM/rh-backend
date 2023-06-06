@@ -85,6 +85,40 @@ CREATE TABLE IF NOT EXISTS pronouns (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL
 );
+DROP table IF EXISTs prepositions;
+CREATE TABLE IF NOT EXISTS prepositions (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL
+);
+INSERT INTO prepositions (name)
+VALUES
+('about'),
+('above'),
+('across'),
+('after'),
+('against'),
+('along'),
+('among'),
+('around'),
+('at'),
+('before'),
+('behind'),
+('below'),
+('beneath'),
+('beside'),
+('between'),
+('beyond'),
+('by'),
+('despite'),
+('during'),
+('except'),
+('for'),
+('from'),
+('in'),
+('inside'),
+('into'),
+('like'),
+('near');
 INSERT INTO pronouns (name)
 VALUES
 ('I'),
