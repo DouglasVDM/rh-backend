@@ -4,7 +4,7 @@
 This is the backend of the PERN Stack application. It is built using Express and provides the API endpoints for fetching word types, words, and submitting sentences.
 
 ## Installation
-1. Clone the repository. `git clone https://github.com/DouglasVDM/testBE.git`
+1. Clone the repository. `git clone ...`
 2. Navigate to the `backend` directory. `cd backend`
 3. Run the following command to install the dependencies: `npm install`
 4. Update the database connection configuration in the `.env` file.
@@ -22,8 +22,8 @@ POSTGRES_DB         =   <postgresDatabaseName>
 6. The server will run on [http://localhost:5000](http://localhost:5000).
 
 ## API Endpoints
-- `GET /api/v1/words`: Retrieves the list of word types.
-- `GET /api/v1/words/:wordType`: Retrieves words of a specific type.
+- `GET /api/v1/wordtypes`: Retrieves the list of word types.
+- `GET /api/v1/${selectedType}`: Retrieves words of a specific type.
 - `GET /api/v1/sentences`: Retrieves all previously submitted sentences.
 - `POST /api/v1/sentences`: Submits a new sentence.
 
@@ -51,9 +51,7 @@ This is the PostgreSQL database used for storing word types, words, and submitte
 6. To start the container: `docker start <nameOfTheContainer>` 
 ## Database Schema
 The database schema consists of the following tables:
-
-- `words`: Stores the words associated with their respective types.
-- `sentences`: Stores the submitted sentences.
+ see the `database.sql` file
 
 ## Sample Data
 You can use the following SQL statements to insert sample data into the tables:
