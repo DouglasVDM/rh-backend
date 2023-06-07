@@ -49,6 +49,7 @@ This is the PostgreSQL database used for storing word types, words, and submitte
 ```
 5. To stop the container: `docker stop <nameOfTheContainer>` 
 6. To start the container: `docker start <nameOfTheContainer>` 
+
 ## Database Schema
 The database schema consists of the following tables:
  see the `database.sql` file
@@ -57,6 +58,10 @@ The database schema consists of the following tables:
 You can use the following SQL statements to insert sample data into the tables:
  see the `database.sql` file
 
+## Stretch Goals
+1. Implement Express Router, server.js file is becoming bloated
+2. Add PUT, DELETE sentences routes to complete CRUD operations
+3. 
 ---
 ---
 
