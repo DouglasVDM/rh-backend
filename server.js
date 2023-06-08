@@ -31,7 +31,7 @@ app.get("/api/v1/words", async (req, res) => {
   try {
     const words = await pool.query("SELECT * FROM words");
 
-    res.status(201).json(words.rows);
+    res.status(200).json(words.rows);
   } catch (err) {
     console.error("Error retrieving words", err);
     res.status(500).json({ error: "Internal server error" });
@@ -43,7 +43,7 @@ app.get("/api/v1/wordtypes", async (req, res) => {
   try {
     const wordtypes = await pool.query("SELECT * FROM types");
 
-    res.status(201).json(wordtypes.rows);
+    res.status(200).json(wordtypes.rows);
   } catch (err) {
     console.error("Error retrieving word types", err);
     res.status(500).json({ error: "Internal server error" });
