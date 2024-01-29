@@ -20,7 +20,7 @@ app.use("/api/v1", sentences);
 // welcome message
 app.get("/api/v1", async (req, res) => {
   try {
-    res.send("From API Server: Hello World");
+    res.send({message:"From API Server: Hello World"});
   } catch (err) {
     console.error(err.message);
   }
