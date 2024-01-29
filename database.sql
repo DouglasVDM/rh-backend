@@ -1,3 +1,17 @@
+DROP TABLE public.adjectives;
+CREATE TABLE public.adjectives (
+	id serial4 NOT NULL,
+	"name" text NOT NULL,
+	CONSTRAINT adjectives_pkey PRIMARY KEY (id)
+);
+
+DROP TABLE public.adverbs;
+CREATE TABLE public.adverbs (
+	id serial4 NOT NULL,
+	"name" text NOT NULL,
+	CONSTRAINT adverbs_pkey PRIMARY KEY (id)
+);
+
 DROP table IF EXISTs words;
 CREATE TABLE IF NOT EXISTS words (
   id SERIAL PRIMARY KEY,
