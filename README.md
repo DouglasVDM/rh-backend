@@ -3,6 +3,8 @@
 ## Description
 This is the backend of the PERN Stack application. It is built using Express and provides the API endpoints for fetching word types, words, and submitting sentences.
 
+[![ci-cd](https://github.com/DouglasVDM/rh-backend/actions/workflows/ci-cd.yaml/badge.svg)](https://github.com/DouglasVDM/rh-backend/actions/workflows/ci-cd.yaml)
+
 ## Installation
 1. Clone the repository. `git clone ...`
 2. Navigate to the `backend` directory. `cd backend`
