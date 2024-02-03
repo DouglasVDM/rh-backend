@@ -13,7 +13,7 @@ jobs:
   build:
     # localhost dev
     # runs-on: ubuntu-latest
-    
+
     # ec2 instance
     runs-on: self-hosted
 
@@ -36,6 +36,7 @@ jobs:
         touch .env
         echo "${{secrets.DEV_ENV_FILE}}" .env
   
+        
     # - run: pm2 restart BackendAPI
     # Restart Nodejs API server after every push to the repo
         
