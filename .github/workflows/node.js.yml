@@ -36,6 +36,6 @@ jobs:
         touch .env
         echo "${{secrets.DEV_ENV_FILE}}" .env
 
-    - run: pm2 restart BackendAPI
+    # - run: pm2 restart BackendAPI
     # Restart Nodejs API server after every push to the repo
         
