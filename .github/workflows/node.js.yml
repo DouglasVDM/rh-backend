@@ -11,8 +11,11 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    # localhost dev
+    # runs-on: ubuntu-latest
+    
+    # ec2 instance
+    runs-on: self-hosted
 
     strategy:
       matrix:
