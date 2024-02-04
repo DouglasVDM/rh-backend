@@ -12,10 +12,10 @@ on:
 jobs:
   build:
     # localhost dev
-    # runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     # ec2 instance
-    runs-on: self-hosted
+    # runs-on: self-hosted
 
     strategy:
       matrix:
