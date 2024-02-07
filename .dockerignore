@@ -42,7 +42,10 @@ build/Release
 node_modules
 
 .env
+.tests
 .gitignore
+
+Dockerfile
 
 server/*.spec.js
 kubernetes
