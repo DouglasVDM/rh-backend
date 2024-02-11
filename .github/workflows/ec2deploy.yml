@@ -44,11 +44,11 @@ jobs:
           chmod 600 key.pem
       - name: Pull Docker image
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@your-ec2-instance-ip 'sudo docker pull douglasvdmerwe/rh-backend:latest'
+          ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_PUBLIC_DNS }} 'sudo docker pull douglasvdmerwe/rh-backend:latest'
       - name: Stop running container
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@your-ec2-instance-ip 'sudo docker stop rh-backend || true'
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@your-ec2-instance-ip 'sudo docker rm rh-backend || true'
+          ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_PUBLIC_DNS }} 'sudo docker stop rh-backend || true'
+          ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_PUBLIC_DNS }} 'sudo docker rm rh-backend || true'
       - name: Run new container
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@your-ec2-instance-ip 'sudo docker run -d --name rh-backend -p 80:3000 douglasvdmerwe/rh-backend:latest'
+          ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_PUBLIC_DNS }} 'sudo docker run -d --name rh-backend -p 80:5000 douglasvdmerwe/rh-backend:latest'
