@@ -65,6 +65,7 @@ jobs:
   deploy:
     name: Deploy image to EC2 and run in container
     needs: push_to_registry
+    
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
