@@ -10,7 +10,7 @@ env:
   # The registry to push the Docker image. docker.io for Docker Hub.
   REGISTRY: douglasvdmerwe
   # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: rh-backend
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   AWS_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
@@ -50,7 +50,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: douglasvdmerwe/rh-backend
+          images: douglasvdmerwe/${{ env.IMAGE_NAME }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
@@ -60,28 +60,28 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-  # deploy:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v2
-  #     - name: Login to Docker Hub
-  #       uses: docker/login-action@v1
-  #       with:
-  #         username: ${{ env.DOCKER_USERNAME }}
-  #         password: ${{ env.DOCKER_PASSWORD }}
-  #     - name: Set permissions for private key
-  #       run: |
-  #         echo "${{ env.AWS_PRIVATE_KEY }}" > key.pem
-  #         chmod 600 key.pem
-  #     - name: Pull Docker image
-  #       run: |
-  #         ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_PUBLIC_DNS }} 'sudo docker pull douglasvdmerwe/rh-backend:latest'
-  #     - name: Stop running container
-  #       run: |
-  #         ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_PUBLIC_DNS }} 'sudo docker stop rh-backend || true'
-  #         ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_PUBLIC_DNS }} 'sudo docker rm rh-backend || true'
-  #     - name: Run new container
-  #       run: |
-  #         ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_PUBLIC_DNS }} 'sudo docker run -d --name rh-backend -p 80:5000 douglasvdmerwe/rh-backend:latest'
+  deploy:
+    name: Deploy image to EC2 and run in container
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Docker
+        run: |  
+          sudo apt-get update
+          sudo apt-get install -y docker.io
+
+      - name: Pull Docker image
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@${{ secrets.EC2_INSTANCE_IP }} 'sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest'
+
+      - name: Stop running container (if exists)
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@${{ secrets.EC2_INSTANCE_IP }} 'sudo docker stop ${{ env.IMAGE_NAME }} || true'
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@${{ secrets.EC2_INSTANCE_IP }} 'sudo docker rm ${{ env.IMAGE_NAME }} || true'
+
+      - name: Run new container
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@${{ secrets.EC2_INSTANCE_IP }} 'sudo docker run -d --name ${{ env.IMAGE_NAME }} -p 80:5000 ${{ secrets.DOCKERHUB_USERNAME }}/rh-backend:latest'
