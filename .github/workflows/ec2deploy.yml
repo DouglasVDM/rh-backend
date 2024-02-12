@@ -8,7 +8,7 @@ on:
 
 env:
   # The registry to push the Docker image. docker.io for Docker Hub.
-  REGISTRY: docker.io
+  REGISTRY: douglasvdmerwe
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
@@ -19,7 +19,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build the Docker image
         run: docker-compose build --no-cache --force-rm 
 
