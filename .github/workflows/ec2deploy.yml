@@ -65,7 +65,7 @@ jobs:
   deploy:
     name: Deploy image to EC2 and run in container
     needs: push_to_registry
-    
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -74,6 +74,11 @@ jobs:
       - name: Install Docker
         run: |  
           curl -fsSL https://get.docker.com | sudo sh -
+
+      - name: Set up SSH key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
 
       - name: Pull Docker image
         run: |
