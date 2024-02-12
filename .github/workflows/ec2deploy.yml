@@ -62,7 +62,7 @@ jobs:
 
   deploy:
     name: Deploy image to EC2 and run in container
-    needs: build
+    needs: push_to_registry
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -70,8 +70,7 @@ jobs:
 
       - name: Install Docker
         run: |  
-          sudo apt-get update
-          sudo apt-get install -y docker.io
+          curl -fsSL https://get.docker.com | sudo sh -
 
       - name: Pull Docker image
         run: |
