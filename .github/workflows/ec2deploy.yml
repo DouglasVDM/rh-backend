@@ -24,6 +24,7 @@ jobs:
         run: docker-compose build --no-cache --force-rm 
 
   test:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -31,6 +32,7 @@ jobs:
         run: docker-compose up -d 
         
   push_to_registry:
+    needs: test
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
