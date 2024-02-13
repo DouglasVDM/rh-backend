@@ -82,13 +82,21 @@ jobs:
 
       - name: Pull Docker image
         run: |
-          ssh -o StrictHostKeyChecking=no -i week2-keypair.pem ubuntu@${{ secrets.EC2_INSTANCE_IP }} 'sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest'
+          ssh -o StrictHostKeyChecking=no -i week2-keypair.pem ubuntu@${{ secrets.EC2_INSTANCE_IP }} '
+          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+          '
 
       - name: Stop running container (if exists)
         run: |
-          ssh -o StrictHostKeyChecking=no -i week2-keypair.pem ubuntu@${{ secrets.EC2_INSTANCE_IP }} 'sudo docker stop ${{ env.IMAGE_NAME }} || true'
-          ssh -o StrictHostKeyChecking=no -i week2-keypair.pem ubuntu@${{ secrets.EC2_INSTANCE_IP }} 'sudo docker rm ${{ env.IMAGE_NAME }} || true'
+          ssh -o StrictHostKeyChecking=no -i week2-keypair.pem ubuntu@${{ secrets.EC2_INSTANCE_IP }} '
+          sudo docker stop ${{ env.IMAGE_NAME }} || true
+          '
+          ssh -o StrictHostKeyChecking=no -i week2-keypair.pem ubuntu@${{ secrets.EC2_INSTANCE_IP }} '
+          sudo docker rm ${{ env.IMAGE_NAME }} || true
+          '
 
       - name: Run new container
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@${{ secrets.EC2_INSTANCE_IP }} 'sudo docker run -d --name ${{ env.IMAGE_NAME }} -p 80:5000 ${{ secrets.DOCKER_USERNAME }}/rh-backend:latest'
+          ssh -o StrictHostKeyChecking=no -i week2-keypair.pem ubuntu@${{ secrets.EC2_INSTANCE_IP }} '
+          sudo docker run -d --name ${{ env.IMAGE_NAME }} -p 80:5000 ${{ secrets.DOCKER_USERNAME }}/rh-backend:latest
+          '
