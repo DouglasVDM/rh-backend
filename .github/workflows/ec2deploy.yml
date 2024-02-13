@@ -78,7 +78,7 @@ jobs:
       - name: Set up SSH key
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > week2-keypair.pem
-          chmod 600 week2-keypair.pem
+          chmod 400 week2-keypair.pem
 
       - name: Pull Docker image
         run: |
