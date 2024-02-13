@@ -75,23 +75,19 @@ jobs:
         run: |  
           curl -fsSL https://get.docker.com | sudo sh -
             
-      - name: Set up SSH directory
-        run: |
-          mkdir -p ~/.ssh/
-            
       - name: Set up SSH key
         run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > week2-keypair.pem
+          chmod 600 week2-keypair.pem
 
       - name: Pull Docker image
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@${{ secrets.EC2_INSTANCE_IP }} 'sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest'
+          ssh -o StrictHostKeyChecking=no -i week2-keypair.pem ubuntu@${{ secrets.EC2_INSTANCE_IP }} 'sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest'
 
       - name: Stop running container (if exists)
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@${{ secrets.EC2_INSTANCE_IP }} 'sudo docker stop ${{ env.IMAGE_NAME }} || true'
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@${{ secrets.EC2_INSTANCE_IP }} 'sudo docker rm ${{ env.IMAGE_NAME }} || true'
+          ssh -o StrictHostKeyChecking=no -i week2-keypair.pem ubuntu@${{ secrets.EC2_INSTANCE_IP }} 'sudo docker stop ${{ env.IMAGE_NAME }} || true'
+          ssh -o StrictHostKeyChecking=no -i week2-keypair.pem ubuntu@${{ secrets.EC2_INSTANCE_IP }} 'sudo docker rm ${{ env.IMAGE_NAME }} || true'
 
       - name: Run new container
         run: |
