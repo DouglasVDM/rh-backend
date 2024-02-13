@@ -14,6 +14,7 @@ env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   AWS_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
+  KEYPAIR: github-actions.pem
 
 jobs:
   build:
@@ -45,8 +46,8 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ env.DOCKER_USERNAME }}
+          password: ${{ env.DOCKER_PASSWORD }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
@@ -77,26 +78,29 @@ jobs:
             
       - name: Set up SSH key
         run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > week2-keypair.pem
-          chmod 400 week2-keypair.pem
+          echo "${{ env.AWS_PRIVATE_KEY }}" > ${{ env.KEYPAIR }}
+          chmod 400 ${{ env.KEYPAIR }}
+
+      - name: Add key to authorized keys
+        run: echo ${{ env.KEYPAIR }} > ~/.ssh/authorized_keys
 
       - name: Pull Docker image
         run: |
-          ssh -o StrictHostKeyChecking=no -i week2-keypair.pem ubuntu@${{ secrets.EC2_INSTANCE_IP }} '
+          ssh -o StrictHostKeyChecking=no -i ${{ env.KEYPAIR }} ubuntu@${{ secrets.EC2_INSTANCE_IP }} '
           sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
           '
 
       - name: Stop running container (if exists)
         run: |
-          ssh -o StrictHostKeyChecking=no -i week2-keypair.pem ubuntu@${{ secrets.EC2_INSTANCE_IP }} '
+          ssh -o StrictHostKeyChecking=no -i ${{ env.KEYPAIR }} ubuntu@${{ secrets.EC2_INSTANCE_IP }} '
           sudo docker stop ${{ env.IMAGE_NAME }} || true
           '
-          ssh -o StrictHostKeyChecking=no -i week2-keypair.pem ubuntu@${{ secrets.EC2_INSTANCE_IP }} '
+          ssh -o StrictHostKeyChecking=no -i ${{ env.KEYPAIR }} ubuntu@${{ secrets.EC2_INSTANCE_IP }} '
           sudo docker rm ${{ env.IMAGE_NAME }} || true
           '
 
       - name: Run new container
         run: |
-          ssh -o StrictHostKeyChecking=no -i week2-keypair.pem ubuntu@${{ secrets.EC2_INSTANCE_IP }} '
+          ssh -o StrictHostKeyChecking=no -i ${{ env.KEYPAIR }} ubuntu@${{ secrets.EC2_INSTANCE_IP }} '
           sudo docker run -d --name ${{ env.IMAGE_NAME }} -p 80:5000 ${{ secrets.DOCKER_USERNAME }}/rh-backend:latest
           '
