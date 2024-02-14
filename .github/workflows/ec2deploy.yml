@@ -79,7 +79,7 @@ jobs:
       - name: Set up SSH key
         run: |
           echo "${{ env.AWS_PRIVATE_KEY }}" > ${{ env.KEYPAIR }}
-          chmod 400 ${{ env.KEYPAIR }}
+          chmod 600 ${{ env.KEYPAIR }}
 
       - name: Add key to authorized keys
         run: echo ${{ env.KEYPAIR }} > ~/.ssh/authorized_keys
