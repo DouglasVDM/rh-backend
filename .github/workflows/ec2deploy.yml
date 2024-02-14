@@ -81,9 +81,6 @@ jobs:
           echo "${{ env.AWS_PRIVATE_KEY }}" > ${{ env.KEYPAIR }}
           chmod 600 ${{ env.KEYPAIR }}
 
-      - name: Add key to authorized keys
-        run: echo ${{ env.KEYPAIR }} > ~/.ssh/authorized_keys
-
       - name: Pull Docker image
         run: |
           ssh -o StrictHostKeyChecking=no -i ${{ env.KEYPAIR }} ubuntu@${{ secrets.EC2_INSTANCE_IP }} '
