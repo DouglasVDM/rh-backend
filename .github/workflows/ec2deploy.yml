@@ -1,8 +1,6 @@
 name: Build and Push Docker Image to DockerHub and Deploy to AWS
 
 on:
-  push:
-    branches: ["dev", "main"]
   pull_request:
     branches: ["dev", "main"]
 
